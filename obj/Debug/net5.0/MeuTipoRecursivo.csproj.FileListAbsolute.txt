@@ -1,0 +1,16 @@
+C:\Users\felip\source\repos\MeuTipoRecursivo\bin\Debug\net5.0\MeuTipoRecursivo.exe
+C:\Users\felip\source\repos\MeuTipoRecursivo\bin\Debug\net5.0\MeuTipoRecursivo.deps.json
+C:\Users\felip\source\repos\MeuTipoRecursivo\bin\Debug\net5.0\MeuTipoRecursivo.runtimeconfig.json
+C:\Users\felip\source\repos\MeuTipoRecursivo\bin\Debug\net5.0\MeuTipoRecursivo.runtimeconfig.dev.json
+C:\Users\felip\source\repos\MeuTipoRecursivo\bin\Debug\net5.0\MeuTipoRecursivo.dll
+C:\Users\felip\source\repos\MeuTipoRecursivo\bin\Debug\net5.0\ref\MeuTipoRecursivo.dll
+C:\Users\felip\source\repos\MeuTipoRecursivo\bin\Debug\net5.0\MeuTipoRecursivo.pdb
+C:\Users\felip\source\repos\MeuTipoRecursivo\obj\Debug\net5.0\MeuTipoRecursivo.csprojAssemblyReference.cache
+C:\Users\felip\source\repos\MeuTipoRecursivo\obj\Debug\net5.0\MeuTipoRecursivo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\felip\source\repos\MeuTipoRecursivo\obj\Debug\net5.0\MeuTipoRecursivo.AssemblyInfoInputs.cache
+C:\Users\felip\source\repos\MeuTipoRecursivo\obj\Debug\net5.0\MeuTipoRecursivo.AssemblyInfo.cs
+C:\Users\felip\source\repos\MeuTipoRecursivo\obj\Debug\net5.0\MeuTipoRecursivo.csproj.CoreCompileInputs.cache
+C:\Users\felip\source\repos\MeuTipoRecursivo\obj\Debug\net5.0\MeuTipoRecursivo.dll
+C:\Users\felip\source\repos\MeuTipoRecursivo\obj\Debug\net5.0\ref\MeuTipoRecursivo.dll
+C:\Users\felip\source\repos\MeuTipoRecursivo\obj\Debug\net5.0\MeuTipoRecursivo.pdb
+C:\Users\felip\source\repos\MeuTipoRecursivo\obj\Debug\net5.0\MeuTipoRecursivo.genruntimeconfig.cache
