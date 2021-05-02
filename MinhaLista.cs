@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace MeuTipoRecursivo
 {
-    public class MinhaLista<T>
+    public class MinhaLista<T> 
     {
         internal class MinhaListaItem<I>
         {
@@ -18,26 +18,17 @@ namespace MeuTipoRecursivo
         public MinhaLista()
         {
             recursivo = new MinhaListaItem<T>();
-         
         }
 
         public void Adicionar (T valor)
         {
             MinhaListaItem<T> item = recursivo;
-
-            if(item.Valor == null)
+            while(item.Node != null)
             {
-                item.Valor = valor;
+               item = item.Node;
             }
-            else
-            {
-                while(item.Node != null)
-                {
-                    item = item.Node;
-                }
-                item.Node = new MinhaListaItem<T>();
-                item.Node.Valor = valor;
-            }
+            item.Node = new MinhaListaItem<T>();
+            item.Node.Valor = valor;
         }
 
         public void Inserir (int posicao, T valor)
@@ -46,31 +37,21 @@ namespace MeuTipoRecursivo
             novo.Valor = valor;
 
             MinhaListaItem<T> item = recursivo;
-            if(posicao == 0)
+            int contador = 0;
+            while(contador != posicao)
             {
-                novo.Node = item;
-                recursivo = novo;
-            }
-            else
-            {
-                int contador = 0;
-                posicao -= 1;
-                while(contador != posicao)
+                if(item.Node == null)
                 {
-                    if(item.Node == null)
-                    {
-                        throw new ArgumentException("O Index deve estar entre os limites da lista. (Parametro 'posicao')");
-                    }
-                    else
-                    {
-                        item = item.Node;
-                        contador++;
-                    }
+                    throw new ArgumentException("O Index deve estar entre os limites da lista. (Parametro 'posicao')");
                 }
-                novo.Node = item.Node;
-                item.Node = novo;
+                else
+                {
+                    item = item.Node;
+                    contador++;
+                }
             }
-            
+            novo.Node = item.Node;
+            item.Node = novo;
         }
 
         public void Alterar (int posicao, T valor)
@@ -108,43 +89,35 @@ namespace MeuTipoRecursivo
                     contador++;
                 }
             }
-            return item.Valor;
+            return item.Node.Valor;
         }
         public void Remover (int posicao)
         {
             MinhaListaItem<T> item = recursivo;
-            if(posicao == 0)
+            int contador = 0;
+            while(contador != posicao)
             {
-                item.Valor = item.Node.Valor;
-                item.Node = item.Node.Node;
-            }
-            else
-            {
-                int contador = 0;
-                posicao -= 1;
-                while(contador != posicao)
+                if(item.Node == null)
                 {
-                    if(item.Node == null)
-                    {
-                        throw new ArgumentException("O item que você tentou remover não existe");
-                    }
-                    else
-                    item = item.Node;
-                    contador++;
+                    throw new ArgumentException("O item que você tentou remover não existe");
                 }
-                item.Node = item.Node.Node;
+                else
+                item = item.Node;
+                contador++;
             }
+            item.Node = item.Node.Node;
         }
 
         public int Tamanho()
         {
+            MinhaListaItem<T> item = recursivo;
             int contador = 0;
-            while(recursivo.Node != null)
+            while(item.Node != null)
             {
-                recursivo = recursivo.Node;
+                item = item.Node;
                 contador++;
             }
-            return contador + 1;
+            return contador;
         }
 
         public override string ToString()
@@ -156,11 +129,14 @@ namespace MeuTipoRecursivo
             int tamanho = Tamanho();
             for (int i = 0; i < tamanho; i++)
             {
-                a += item.Valor;
                 if(item.Node != null)
                 {
-                    a += ", ";
                     item = item.Node;
+                    a += item.Valor;
+                    if(item.Node != null)
+                    {
+                        a += ", ";
+                    }
                 }
             }
             a += " }";
@@ -174,12 +150,12 @@ namespace MeuTipoRecursivo
             MinhaListaItem<T> item = new MinhaListaItem<T>();
             item = recursivo;
 
-            while(item.Node != null)
+            while(item.Node.Node != null)
             {
-                bool resp = func(item.Valor);
+                bool resp = func(item.Node.Valor);
                 if(resp)
                 {
-                    novo.Adicionar(item.Valor);
+                    novo.Adicionar(item.Node.Valor);
                 }
                 item = item.Node;
             }
