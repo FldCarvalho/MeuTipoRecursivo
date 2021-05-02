@@ -5,24 +5,25 @@ using System.Linq;
 
 namespace MeuTipoRecursivo
 {
-    public class MinhaLista
+    public class MinhaLista<T>
     {
-        internal class MinhaListaItem
+        internal class MinhaListaItem<I>
         {
-            public int? Valor {get; set;}
-            public MinhaListaItem Node { get; set; }
+            public I Valor {get; set;}
+            public MinhaListaItem<I> Node { get; set; }
         }
 
-        private MinhaListaItem recursivo { get; set; }
+        private MinhaListaItem<T> recursivo { get; set; }
 
         public MinhaLista()
         {
-            recursivo = new MinhaListaItem();
+            recursivo = new MinhaListaItem<T>();
+         
         }
 
-        public void Adicionar (int? valor)
+        public void Adicionar (T valor)
         {
-            MinhaListaItem item = recursivo;
+            MinhaListaItem<T> item = recursivo;
 
             if(item.Valor == null)
             {
@@ -34,17 +35,17 @@ namespace MeuTipoRecursivo
                 {
                     item = item.Node;
                 }
-                item.Node = new MinhaListaItem();
+                item.Node = new MinhaListaItem<T>();
                 item.Node.Valor = valor;
             }
         }
 
-         public void Inserir (int posicao, int valor)
+        public void Inserir (int posicao, T valor)
         {
-            MinhaListaItem novo = new MinhaListaItem();
+            MinhaListaItem<T> novo = new MinhaListaItem<T>();
             novo.Valor = valor;
 
-            MinhaListaItem item = recursivo;
+            MinhaListaItem<T> item = recursivo;
             if(posicao == 0)
             {
                 novo.Node = item;
@@ -56,8 +57,15 @@ namespace MeuTipoRecursivo
                 posicao -= 1;
                 while(contador != posicao)
                 {
-                    item = item.Node;
-                    contador++;
+                    if(item.Node == null)
+                    {
+                        throw new ArgumentException("O Index deve estar entre os limites da lista. (Parametro 'posicao')");
+                    }
+                    else
+                    {
+                        item = item.Node;
+                        contador++;
+                    }
                 }
                 novo.Node = item.Node;
                 item.Node = novo;
@@ -65,32 +73,46 @@ namespace MeuTipoRecursivo
             
         }
 
-        public void Alterar (int posicao, int valor)
+        public void Alterar (int posicao, T valor)
         {
-            MinhaListaItem item = recursivo;
+            MinhaListaItem<T> item = recursivo;
             int contador = 0;
             while(contador != posicao)
             {
-                item = item.Node;
-                contador++;
+                if(item.Node == null)
+                {
+                    throw new ArgumentException("O item que você tentou alterar não existe");
+                }
+                else
+                {
+                    item = item.Node;
+                    contador++;
+                }
             }
             item.Valor = valor;
         }
 
-        public int? Ler (int posicao)
+        public T Ler (int posicao)
         {
-            MinhaListaItem item = recursivo;
+            MinhaListaItem<T> item = recursivo;
             int contador = 0;
             while(contador != posicao)
             {
-                item = item.Node;
-                contador++;
+                if(item.Node == null)
+                {
+                    throw new ArgumentException("O item que você tentou ler não existe");
+                }
+                else
+                {
+                    item = item.Node;
+                    contador++;
+                }
             }
             return item.Valor;
         }
         public void Remover (int posicao)
         {
-            MinhaListaItem item = recursivo;
+            MinhaListaItem<T> item = recursivo;
             if(posicao == 0)
             {
                 item.Valor = item.Node.Valor;
@@ -102,6 +124,11 @@ namespace MeuTipoRecursivo
                 posicao -= 1;
                 while(contador != posicao)
                 {
+                    if(item.Node == null)
+                    {
+                        throw new ArgumentException("O item que você tentou remover não existe");
+                    }
+                    else
                     item = item.Node;
                     contador++;
                 }
@@ -122,7 +149,7 @@ namespace MeuTipoRecursivo
 
         public override string ToString()
         {
-            MinhaListaItem item = new MinhaListaItem();
+            MinhaListaItem<T> item = new MinhaListaItem<T>();
             item = recursivo;
 
             string a ="{ ";
@@ -140,17 +167,17 @@ namespace MeuTipoRecursivo
             return a;
         }
 
-        public MinhaLista Filtrar (Func<int?, bool> func)
+        public MinhaLista<T> Filtrar (Func<T, bool> func)
         {
-            MinhaLista novo = new MinhaLista();
+            MinhaLista<T> novo = new MinhaLista<T>();
 
-            MinhaListaItem item = new MinhaListaItem();
+            MinhaListaItem<T> item = new MinhaListaItem<T>();
             item = recursivo;
 
             while(item.Node != null)
             {
                 bool resp = func(item.Valor);
-                if(resp == true)
+                if(resp)
                 {
                     novo.Adicionar(item.Valor);
                 }
