@@ -12,9 +12,14 @@ namespace MeuTipoRecursivo
             public I Valor {get; set;}
             public MinhaListaItem<I> Node { get; set; }
         }
-
         private MinhaListaItem<T> recursivo { get; set; }
-
+        public int Tamanho
+        {
+            get
+            {
+                return TamanhoLista();
+            }
+        }
         public MinhaLista()
         {
             recursivo = new MinhaListaItem<T>();
@@ -70,7 +75,7 @@ namespace MeuTipoRecursivo
                     contador++;
                 }
             }
-            item.Valor = valor;
+            item.Node.Valor = valor;
         }
 
         public T Ler (int posicao)
@@ -108,7 +113,7 @@ namespace MeuTipoRecursivo
             item.Node = item.Node.Node;
         }
 
-        public int Tamanho()
+        private int TamanhoLista()
         {
             MinhaListaItem<T> item = recursivo;
             int contador = 0;
@@ -126,7 +131,7 @@ namespace MeuTipoRecursivo
             item = recursivo;
 
             string a ="{ ";
-            int tamanho = Tamanho();
+            int tamanho = TamanhoLista();
             for (int i = 0; i < tamanho; i++)
             {
                 if(item.Node != null)
